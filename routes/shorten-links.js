@@ -13,13 +13,13 @@ router.get("/li/:id", getShortenLink);
 
 router.post("/li/", createShortenLink);
 
-router.use(requireAuth);
+// router.use(requireAuth);
 
 //protected rotues
-router.get("/li/", getAllLinks);
+router.get("/li/", requireAuth, getAllLinks);
 
-router.patch("/li/:id", updateShortenLink);
+router.patch("/li/:id", requireAuth, updateShortenLink);
 
-router.delete("/li/:id", deleteShortenLink);
+router.delete("/li/:id", requireAuth, deleteShortenLink);
 
 module.exports = router;
