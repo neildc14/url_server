@@ -17,8 +17,8 @@ app.use(bodyParser.json());
 app.use(logger("dev"));
 
 //routes
-app.use("/li", shortenLinks);
-app.use("/au", user);
+app.use(shortenLinks);
+app.use(user);
 
 mongoose.set("strictQuery", true);
 mongoose.connect(process.env.MONGODB_URI, {

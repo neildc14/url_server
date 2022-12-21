@@ -9,17 +9,17 @@ const {
 } = require("../controllers/shortenLinkController");
 const requireAuth = require("../middleware/requireAuth");
 
-router.get("/:id", getShortenLink);
+router.get("/li/:id", getShortenLink);
 
-router.post("/", createShortenLink);
+router.post("/li/", createShortenLink);
 
 router.use(requireAuth);
 
 //protected rotues
-router.get("/", getAllLinks);
+router.get("/li/", getAllLinks);
 
-router.patch("/:id", updateShortenLink);
+router.patch("/li/:id", updateShortenLink);
 
-router.delete("/:id", deleteShortenLink);
+router.delete("/li/:id", deleteShortenLink);
 
 module.exports = router;
