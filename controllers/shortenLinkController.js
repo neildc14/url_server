@@ -45,7 +45,6 @@ const createShortenLink = async (req, res) => {
     });
     res.status(200).json(generated_shorten_link);
   } catch (error) {
-    console.log(error);
     res.status(400).json({ error: "Failed to generate shortened link" });
   }
 };
@@ -59,7 +58,6 @@ const deleteShortenLink = async (req, res) => {
     });
     res.status(200).json(delete_shorten_link);
   } catch (error) {
-    console.log(error);
     res.status(400).json({ error: "Failed to delete shortened link" });
   }
 };
