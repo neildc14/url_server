@@ -14,9 +14,9 @@ const getShortenLink = async (req, res) => {
 
   try {
     const shorten_link = await ShortenLink.findOne({ shorten_link: id }).exec();
-    const has_user = shorten_link.user_id;
+    const shared = shorten_link.shared
 
-    if (has_user && !user_id) {
+    if (shared === false) {
       return res.status(400).json({ error: "Request is not authorized" });
     }
     res.redirect(shorten_link.original_link);
