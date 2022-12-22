@@ -9,13 +9,12 @@ const {
 } = require("../controllers/shortenLinkController");
 const requireAuth = require("../middleware/requireAuth");
 
-router.get("/li/:id", getShortenLink);
 
 router.post("/li/", createShortenLink);
 
-// router.use(requireAuth);
+router.get("/li/:id", getShortenLink);
 
-//protected rotues
+//protected routes
 router.get("/li/", requireAuth, getAllLinks);
 
 router.patch("/li/:id", requireAuth, updateShortenLink);

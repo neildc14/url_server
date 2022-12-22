@@ -28,6 +28,13 @@ const getShortenLink = async (req, res) => {
 const createShortenLink = async (req, res) => {
   const { user_id, original_link } = req.body;
   const valid_url = isValidURL(original_link);
+  let shared;
+
+  if (user_id) {
+    shared = false;
+  } else {
+    shared = true;
+  }
 
   if (!valid_url) {
     res.status(400).json({ error: "Please input valid URL" });
@@ -42,9 +49,11 @@ const createShortenLink = async (req, res) => {
       user_id,
       original_link,
       shorten_link,
+      shared,
     });
     res.status(200).json(generated_shorten_link);
   } catch (error) {
+    console.log(error);
     res.status(400).json({ error: "Failed to generate shortened link" });
   }
 };
