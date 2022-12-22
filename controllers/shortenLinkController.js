@@ -3,7 +3,6 @@ const generateRandomString = require("../helpers/generateRandomString");
 const isValidURL = require("../helpers/urlValidator");
 
 const getAllLinks = async (req, res) => {
-  console.log(req.user._id);
   const user_id = req.user._id;
   const all_links = await ShortenLink.find({ user_id }).sort({ createdAt: 1 });
   res.status(200).json(all_links);
@@ -17,7 +16,7 @@ const getShortenLink = async (req, res) => {
     const shorten_link = await ShortenLink.findOne({ shorten_link: id }).exec();
     const has_user = shorten_link.user_id;
 
-    if (has_user && !user_id) {
+    if (has_user === null && !user_id) {
       return res.status(400).json({ error: "Request is not authorized" });
     }
     res.redirect(shorten_link.original_link);
@@ -27,8 +26,7 @@ const getShortenLink = async (req, res) => {
 };
 
 const createShortenLink = async (req, res) => {
-  const { original_link } = req.body;
-  const user_id = req.user?._id;
+  const { user_id, original_link } = req.body;
   const valid_url = isValidURL(original_link);
 
   if (!valid_url) {
